@@ -1,0 +1,108 @@
+package circle_area;
+
+public class Main {
+
+    public static void main(String[] args) {
+	new Circle_Gui();
+    }
+}
+
+
+circle class independently from main class
+package circle_area;
+
+public class Cicle {
+
+    private double radious=0.0;
+
+    public Cicle()
+    {
+
+    }
+    public double getRadious() {
+        return radious;
+    }
+
+    public void setRadious(double radious) {
+        this.radious = radious;
+    }
+
+    public double getArea()
+    {
+        return Math.PI*this.radious*this.radious;
+    }
+
+    public String toString() {
+        return Double.toString(getArea());
+    }
+}
+ 
+
+circleGui class independently from another classes
+
+package circle_area;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Circle_Gui extends JFrame {
+
+    private JPanel panel;
+    private JLabel label = new JLabel("Enter a radious number");
+    private JTextField txt = new JTextField();
+    private JButton button = new JButton("Compute");
+    Cicle c = new Cicle();
+    private JLabel label1 = new JLabel();
+    private JPanel panel1 = new JPanel(null);
+    private JLabel label2 = new JLabel("GROUP 6");
+    private Font font = new Font("sanserif",Font.BOLD,40);
+
+    public Circle_Gui()
+    {
+        setTitle("Circle Area");
+        setSize(500,300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        setLocationRelativeTo(null);
+        add(circleGui());
+    }
+
+    public Component circleGui()
+    {   panel = new JPanel(null);
+
+        this.label.setBounds(100,100,200,20);
+        this.panel.add(label);
+
+        this.txt.setBounds(250,100,100,20);
+        this.panel.add(txt);
+
+        this.button.setBounds(150,130,100,20);
+        this.button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double number = Double.parseDouble(txt.getText());
+                c.setRadious(number);
+                label1.setText("The Area of The Circle is: "+c.toString());
+
+            }
+        });
+        this.panel.add(button);
+
+        this.label1.setBounds(100,160,300,20);
+        this.panel.add(label1);
+
+        this.panel1.setBounds(10,10,460,80);
+        this.panel1.setBackground(Color.green);
+
+        this.label2.setBounds(150,25,200,40);
+        this.label2.setFont(font);
+        this.panel1.add(label2);
+
+        this.panel.add(panel1);
+
+        return panel;
+
+    }
+
+}
